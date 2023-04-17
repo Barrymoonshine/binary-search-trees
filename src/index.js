@@ -35,8 +35,20 @@ const buildTree = (array, start, end) => {
   return node;
 };
 
+const removeDuplicates = (array) => {
+  const uniqueArray = [];
+  array.forEach((item) => {
+    if (!uniqueArray.includes(item)) {
+      uniqueArray.push(item);
+    }
+  });
+  return uniqueArray;
+};
+
 const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const start = 0;
 const end = myArray.length - 1; // 2
+const sortedArray = mergeSort(myArray);
 
-console.log(mergeSort(myArray));
+console.log(sortedArray);
+console.log(removeDuplicates(sortedArray));
