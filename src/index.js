@@ -1,4 +1,10 @@
-const NodeFactory = (value, left = null, right = null) => ({ value, left, right });
+import mergeSort from './mergeSort.js'; // Importing mergeSort algorithm from Recursion project
+
+const NodeFactory = (value, left = null, right = null) => ({
+  value,
+  left,
+  right,
+});
 
 // Function to visualize the binary search tree in the console
 // const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -14,7 +20,7 @@ const NodeFactory = (value, left = null, right = null) => ({ value, left, right 
 //   }
 // };
 
-let root = null;
+const root = null;
 
 const buildTree = (array, start, end) => {
   // Base case to exit algorithm
@@ -29,10 +35,8 @@ const buildTree = (array, start, end) => {
   return node;
 };
 
-const myArray = [1, 2, 3, 4];
+const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const start = 0;
 const end = myArray.length - 1; // 2
 
-root = buildTree(myArray, start, end);
-
-console.log(root);
+console.log(mergeSort(myArray));

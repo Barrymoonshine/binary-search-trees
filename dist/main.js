@@ -1,0 +1,1 @@
+(()=>{"use strict";const t=s=>{const n=s.length,e=Math.round(n/2),h=s.slice(0,e),o=s.slice(e,n);return n<=1?s:((t,s)=>{const n=[];for(;t.length&&s.length;)t[0]<s[0]?n.push(t.shift()):n.push(s.shift());return[...n,...t,...s]})(t(h),t(o))},s=t;console.log(s([1,7,4,23,8,9,4,3,5,7,9,67,6345,324]))})();
