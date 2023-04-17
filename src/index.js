@@ -46,7 +46,6 @@ const removeDuplicates = (array) => {
 };
 
 const insert = (value, node) => {
-  console.log(node);
   // First check if tree has been initialised
   if (node === null) {
     root = NodeFactory(value);
@@ -72,6 +71,31 @@ const insert = (value, node) => {
       insert(value, node.right);
     } else {
       node.right = NodeFactory(value);
+    }
+  }
+};
+
+const deleteNode = (value, node) => {
+  // First check if tree has been initialised
+  if (node === null) {
+    console.log('Error, no data present in the tree');
+    return null;
+  }
+  // Recurse down the tree
+  if (node.data < value) {
+    deleteNode(value, node.left);
+  } else if (node.data > value) {
+    deleteNode(value, node.right);
+  } else {
+    // Then check if the node is a leaf, if so remove it from the tree
+    if (node.left === null && node.right === null) {
+      node.data = null;
+    }
+    if (node.left === null) {
+      return node.right;
+    }
+    if (node.right === null) {
+      return root.left;
     }
   }
 };
