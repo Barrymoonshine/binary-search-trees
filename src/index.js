@@ -121,6 +121,31 @@ const deleteNode = (value, node) => {
   return node;
 };
 
+const findNode = (value, node) => {
+  // Base case if the tree is empty
+  if (node === null) {
+    console.log('Error, no data present in the tree');
+    return null;
+  }
+  // First check if data at current node is what we are lookin for
+  if (node.data === value) {
+    console.log('success');
+    console.log(node);
+    return node;
+    // If not, check if the data is less than current node
+    // If true, search left sub-tree
+  }
+  if (node.data > value && node.left !== null) {
+    return findNode(value, node.left);
+    // Check if data is greater than current node
+    // If true, search right sub-tree
+  }
+  if (node.data < value && node.right !== null) {
+    return findNode(value, node.right);
+  }
+  return null;
+};
+
 const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const start = 0;
 const end = myArray.length - 1; // 2
@@ -128,13 +153,16 @@ const sortedArray = mergeSort(myArray);
 const uniqueArray = removeDuplicates(sortedArray);
 root = buildTree(uniqueArray, start, end);
 
-console.log(root);
+// console.log(root);
 
 insertNode(10, root); // correctly inserts 10 as a new node to the right of 9,
 // left of 6,345, 67 and 23
 
+// prettyPrint(root);
+
+deleteNode(10, root); // Correctly deletes the previously added 10
+
 prettyPrint(root);
 
-deleteNode(10, root);
-
-prettyPrint(root);
+console.log(findNode(4, root)); // Expected output, node to the left of 9 with 1 and 7
+// as children
