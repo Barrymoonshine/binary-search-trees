@@ -87,7 +87,7 @@ const findMin = (node) => {
 };
 
 const deleteNode = (value, node) => {
-  // Base case if the tree is empty
+  // Edge case if the tree is empty
   if (node === null) {
     console.log('Error, no data present in the tree');
     return null;
@@ -122,7 +122,7 @@ const deleteNode = (value, node) => {
 };
 
 const findNode = (value, node) => {
-  // Base case if the tree is empty
+  // Edge case if the tree is empty
   if (node === null) {
     console.log('Error, no data present in the tree');
     return null;
@@ -146,6 +146,28 @@ const findNode = (value, node) => {
   return null;
 };
 
+const levelOrder = (root) => {
+  // Edge case, if empty root
+  if (root === null) {
+    return [];
+  }
+  // Initialise the queue with the root
+  const queue = [root];
+  const result = [];
+  while (queue.length !== 0) {
+    const node = queue.shift();
+    result.push(node.data);
+
+    if (node.left) {
+      queue.push(node.left);
+    }
+    if (node.right) {
+      queue.push(node.right);
+    }
+  }
+  return result;
+};
+
 const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const start = 0;
 const end = myArray.length - 1; // 2
@@ -164,5 +186,6 @@ deleteNode(10, root); // Correctly deletes the previously added 10
 
 prettyPrint(root);
 
-console.log(findNode(4, root)); // Expected output, node to the left of 9 with 1 and 7
-// as children
+// console.log(findNode(4, root)); // Returns the correct node with 1 and 7 as it's children
+
+console.log(levelOrder(root));
