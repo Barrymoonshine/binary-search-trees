@@ -146,13 +146,7 @@ const findNode = (value, node) => {
   return null;
 };
 
-const processNode = (node) => {
-  if (node.data === null || node.data === undefined) {
-    // Do not add empty leaves
-  } else {
-    return node.data;
-  }
-};
+const processNode = (node) => node.data;
 
 const levelOrder = (root, callback) => {
   // First check if there is a BST
@@ -166,7 +160,10 @@ const levelOrder = (root, callback) => {
   // Loop through the queue taking the first element from the queue
   while (queue.length !== 0) {
     const node = queue.shift();
-    result[result.length] = processNode(node);
+    // Only add leaves that have a value
+    if (callback(node)) {
+      result[result.length] = callback(node);
+    }
 
     // If the visited node has left or right children, add these to the queue
     if (node.left) {
