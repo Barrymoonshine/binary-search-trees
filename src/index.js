@@ -221,6 +221,25 @@ const preOrder = (root, callBack) => {
   return result;
 };
 
+// Left, right, root
+// Expected output [2,12,3,28,39,15]
+const postOrder = (root, callBack) => {
+  // First check if there is a BST
+  if (root === null) {
+    return [];
+  }
+
+  const result = [];
+  const traverse = (root) => {
+    if (root.left) traverse(root.left);
+    if (root.right) traverse(root.right);
+    result[result.length] = callBack(root);
+  };
+
+  traverse(root);
+  return result;
+};
+
 const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const myEasyArray = [2, 3, 12, 15, 28, 36, 39];
 const start = 0;
@@ -249,4 +268,6 @@ prettyPrint(rootEasyExample);
 
 // console.log(inOrder(rootEasyExample, processNode)); using easyArray returns [2,3,12,15,28,36,39]
 
-console.log(preOrder(rootEasyExample, processNode));
+// console.log(preOrder(rootEasyExample, processNode)); using easyArray returns [13,3,5,12,36,28,39]
+
+console.log(postOrder(rootEasyExample, processNode));
