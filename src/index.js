@@ -146,18 +146,29 @@ const findNode = (value, node) => {
   return null;
 };
 
-const levelOrder = (root) => {
-  // Edge case, if empty root
+const processNode = (node) => {
+  if (node.data === null || node.data === undefined) {
+    // Do not add empty leaves
+  } else {
+    return node.data;
+  }
+};
+
+const levelOrder = (root, callback) => {
+  // First check if there is a BST
   if (root === null) {
     return [];
   }
-  // Initialise the queue with the root
-  const queue = [root];
+
   const result = [];
+  // Then add initialize the queue with the root
+  const queue = [root];
+  // Loop through the queue taking the first element from the queue
   while (queue.length !== 0) {
     const node = queue.shift();
-    result.push(node.data);
+    result[result.length] = processNode(node);
 
+    // If the visited node has left or right children, add these to the queue
     if (node.left) {
       queue.push(node.left);
     }
@@ -188,4 +199,4 @@ prettyPrint(root);
 
 // console.log(findNode(4, root)); // Returns the correct node with 1 and 7 as it's children
 
-console.log(levelOrder(root));
+console.log(levelOrder(root, processNode));
