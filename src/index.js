@@ -146,9 +146,10 @@ const findNode = (value, node) => {
   return null;
 };
 
+// Callback function
 const processNode = (node) => node.data;
 
-const levelOrder = (root, callback) => {
+const levelOrder = (root, callBack) => {
   // First check if there is a BST
   if (root === null) {
     return [];
@@ -161,8 +162,8 @@ const levelOrder = (root, callback) => {
   while (queue.length !== 0) {
     const node = queue.shift();
     // Only add leaves that have a value
-    if (callback(node)) {
-      result[result.length] = callback(node);
+    if (callBack(node)) {
+      result[result.length] = callBack(node);
     }
 
     // If the visited node has left or right children, add these to the queue
@@ -176,12 +177,38 @@ const levelOrder = (root, callback) => {
   return result;
 };
 
+// Left, root, right
+// Using easyArray, expected 2,3,12,15,28,36,39
+const inOrder = (root, callBack) => {
+  // First check if there is a BST
+  if (root === null) {
+    return;
+  }
+  const result = [];
+
+  const traverse = (root) => {
+    console.log(root);
+    // Keep traversing the left node until there are no more children
+    if (root.left) traverse(root.left);
+    // Push the value of the left node into the results array
+    result[result.length] = callBack(root);
+    // Keep traversing the right node until there are no more children
+    if (root.right) traverse(root.right);
+    // Push the value of the right node into the results array
+  };
+
+  traverse(root);
+  return result;
+};
+
 const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+const myEasyArray = [2, 3, 12, 15, 28, 36, 39];
 const start = 0;
 const end = myArray.length - 1; // 2
 const sortedArray = mergeSort(myArray);
 const uniqueArray = removeDuplicates(sortedArray);
 root = buildTree(uniqueArray, start, end);
+const rootEasyExample = buildTree(myEasyArray, start, myEasyArray.length - 1);
 
 // console.log(root);
 
@@ -192,8 +219,12 @@ insertNode(10, root); // correctly inserts 10 as a new node to the right of 9,
 
 deleteNode(10, root); // Correctly deletes the previously added 10
 
-prettyPrint(root);
+// prettyPrint(root);
+
+prettyPrint(rootEasyExample);
 
 // console.log(findNode(4, root)); // Returns the correct node with 1 and 7 as it's children
 
-console.log(levelOrder(root, processNode));
+// console.log(levelOrder(root, processNode)); // Returns the level order traversed BST
+
+console.log(inOrder(rootEasyExample, processNode));
