@@ -182,19 +182,39 @@ const levelOrder = (root, callBack) => {
 const inOrder = (root, callBack) => {
   // First check if there is a BST
   if (root === null) {
-    return;
+    return [];
   }
   const result = [];
 
   const traverse = (root) => {
-    console.log(root);
     // Keep traversing the left node until there are no more children
     if (root.left) traverse(root.left);
-    // Push the value of the left node into the results array
+    // Add the value of the left node into the results array
     result[result.length] = callBack(root);
     // Keep traversing the right node until there are no more children
     if (root.right) traverse(root.right);
-    // Push the value of the right node into the results array
+  };
+
+  traverse(root);
+  return result;
+};
+
+// Root, left , right
+// Using easyArray expected [13,3,5,12,36,28,39]
+const preOrder = (root, callBack) => {
+  // First check if there is a BST
+  if (root === null) {
+    return [];
+  }
+
+  const result = [];
+  const traverse = (root) => {
+    // Add the value of the root node to the results array
+    result[result.length] = callBack(root);
+    // Then traverse left
+    if (root.left) traverse(root.left);
+    // Traverse right until there are no more children
+    if (root.right) traverse(root.right);
   };
 
   traverse(root);
@@ -227,4 +247,6 @@ prettyPrint(rootEasyExample);
 
 // console.log(levelOrder(root, processNode)); // Returns the level order traversed BST
 
-console.log(inOrder(rootEasyExample, processNode));
+// console.log(inOrder(rootEasyExample, processNode)); using easyArray returns [2,3,12,15,28,36,39]
+
+console.log(preOrder(rootEasyExample, processNode));
