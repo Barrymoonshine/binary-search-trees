@@ -280,6 +280,40 @@ const findDepth = (value, node, depth = 0) => {
   }
 };
 
+// A BST is deemed to be balanced if the height of the left sub-tree and right subtree
+// Do not differ by more than 1
+const getHeight = (root) => {
+  if (root == null) {
+    return 0;
+  }
+  const leftHeight = getHeight(root.left);
+  const rightHeight = getHeight(root.right);
+  return Math.max(leftHeight, rightHeight) + 1;
+};
+
+// Checks if the difference between the height of the left and right subtree
+// Is not more than 1
+const isTreeBalanced = (root) => {
+  // Base case, empty tree balanced
+  if (root === null) {
+    return true;
+  }
+
+  // Recursively check if left and right subtrees are balanced
+  const leftHeight = getHeight(root.left);
+  const rightHeight = getHeight(root.right);
+
+  if (
+    Math.abs(leftHeight - rightHeight) <= 1 &&
+    isTreeBalanced(root.left) &&
+    isTreeBalanced(root.right)
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
 const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const myEasyArray = [2, 3, 12, 15, 28, 36, 39];
 const start = 0;
@@ -316,4 +350,6 @@ prettyPrint(rootEasyExample);
 
 // console.log(findHeight(rootEasyExample.left)); //  Returns expected output 1
 
-console.log(findDepth(2, rootEasyExample)); // Expected output 2
+// console.log(findDepth(2, rootEasyExample)); // Returns output 2
+
+console.log(isTreeBalanced(rootEasyExample)); // Expected output true
