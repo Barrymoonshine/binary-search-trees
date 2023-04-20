@@ -257,6 +257,29 @@ const findHeight = (node) => {
   return result;
 };
 
+const findDepth = (value, node, depth = 0) => {
+  console.log(`depth ${depth}`);
+  console.log(node);
+  // Edge case if the tree is empty
+  if (node === null) {
+    return depth;
+  }
+  // First check if data at current node is what we are lookin for
+  if (node.data === value) {
+    return depth;
+    // If not, check if the data is less than current node
+    // If true, search left sub-tree
+  }
+  if (node.data > value && node.left !== null) {
+    return findDepth(value, node.left, (depth += 1));
+    // Check if data is greater than current node
+    // If true, search right sub-tree
+  }
+  if (node.data < value && node.right !== null) {
+    return findDepth(value, node.right), (depth += 1);
+  }
+};
+
 const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const myEasyArray = [2, 3, 12, 15, 28, 36, 39];
 const start = 0;
@@ -277,7 +300,7 @@ deleteNode(10, root); // Correctly deletes the previously added 10
 
 // prettyPrint(root);
 
-// prettyPrint(rootEasyExample);
+prettyPrint(rootEasyExample);
 
 // console.log(findNode(4, root)); // Returns the correct node with 1 and 7 as it's children
 
@@ -289,4 +312,8 @@ deleteNode(10, root); // Correctly deletes the previously added 10
 
 // console.log(postOrder(rootEasyExample, processNode)); returns expected output [2,12,3,28,39,15]
 
-console.log(findHeight(rootEasyExample)); // Expected result 2
+// console.log(findHeight(rootEasyExample)); // Returns expected output 2
+
+// console.log(findHeight(rootEasyExample.left)); //  Returns expected output 1
+
+console.log(findDepth(2, rootEasyExample)); // Expected output 2
