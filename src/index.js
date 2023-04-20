@@ -304,14 +304,22 @@ const isTreeBalanced = (root) => {
   const rightHeight = getHeight(root.right);
 
   if (
-    Math.abs(leftHeight - rightHeight) <= 1 &&
-    isTreeBalanced(root.left) &&
-    isTreeBalanced(root.right)
+    Math.abs(leftHeight - rightHeight) <= 1
+    && isTreeBalanced(root.left)
+    && isTreeBalanced(root.right)
   ) {
     return true;
   }
 
   return false;
+};
+
+const rebalance = (root) => {
+  const orderedArray = levelOrder(root, processNode);
+  const start = 0;
+  const end = orderedArray.length - 1;
+  const balancedTree = buildTree(orderedArray, start, end);
+  return balancedTree;
 };
 
 const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
