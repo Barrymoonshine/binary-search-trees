@@ -240,6 +240,23 @@ const postOrder = (root, callBack) => {
   return result;
 };
 
+// Largest number of edges from target node to the furthest away leaf
+const findHeight = (node) => {
+  // Base case to exist recursion
+  if (node === null) {
+    return -1;
+  }
+
+  // Recursively find height of left and right subtrees
+  const leftHeight = findHeight(node.left);
+  const rightHeight = findHeight(node.right);
+
+  // Return the max plus one for the current node
+  const result = Math.max(leftHeight, rightHeight) + 1;
+
+  return result;
+};
+
 const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const myEasyArray = [2, 3, 12, 15, 28, 36, 39];
 const start = 0;
@@ -260,14 +277,16 @@ deleteNode(10, root); // Correctly deletes the previously added 10
 
 // prettyPrint(root);
 
-prettyPrint(rootEasyExample);
+// prettyPrint(rootEasyExample);
 
 // console.log(findNode(4, root)); // Returns the correct node with 1 and 7 as it's children
 
 // console.log(levelOrder(root, processNode)); // Returns the level order traversed BST
 
-// console.log(inOrder(rootEasyExample, processNode)); using easyArray returns [2,3,12,15,28,36,39]
+// console.log(inOrder(rootEasyExample, processNode)); returns expected output [2,3,12,15,28,36,39]
 
-// console.log(preOrder(rootEasyExample, processNode)); using easyArray returns [13,3,5,12,36,28,39]
+// console.log(preOrder(rootEasyExample, processNode)); returns expected output [13,3,5,12,36,28,39]
 
-console.log(postOrder(rootEasyExample, processNode));
+// console.log(postOrder(rootEasyExample, processNode)); returns expected output [2,12,3,28,39,15]
+
+console.log(findHeight(rootEasyExample)); // Expected result 2
