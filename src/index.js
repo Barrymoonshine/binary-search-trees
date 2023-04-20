@@ -304,9 +304,9 @@ const isTreeBalanced = (root) => {
   const rightHeight = getHeight(root.right);
 
   if (
-    Math.abs(leftHeight - rightHeight) <= 1
-    && isTreeBalanced(root.left)
-    && isTreeBalanced(root.right)
+    Math.abs(leftHeight - rightHeight) <= 1 &&
+    isTreeBalanced(root.left) &&
+    isTreeBalanced(root.right)
   ) {
     return true;
   }
@@ -322,42 +322,76 @@ const rebalance = (root) => {
   return balancedTree;
 };
 
-const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const myEasyArray = [2, 3, 12, 15, 28, 36, 39];
-const start = 0;
-const end = myArray.length - 1; // 2
-const sortedArray = mergeSort(myArray);
-const uniqueArray = removeDuplicates(sortedArray);
-root = buildTree(uniqueArray, start, end);
-const rootEasyExample = buildTree(myEasyArray, start, myEasyArray.length - 1);
+const createRandomArray = (num, maxVal) => {
+  const randomArray = [];
+  for (let i = 0; i < num; i += 1) {
+    randomArray.push(Math.floor(Math.random() * maxVal));
+  }
+  return randomArray;
+};
 
-// console.log(root);
+const runTests = () => {
+  const myArray = createRandomArray(10, 100);
+  const sortedArray = mergeSort(myArray);
+  const uniqueArray = removeDuplicates(sortedArray);
+  const myBST = buildTree(uniqueArray, 0, uniqueArray.length - 1);
+  prettyPrint(myBST);
+  console.log(`Is BST balanced? ${isTreeBalanced(myBST)}`);
+  console.log(levelOrder(myBST, processNode));
+  console.log(inOrder(myBST, processNode));
+  console.log(postOrder(myBST, processNode));
+  const node1 = NodeFactory(145);
+  const node2 = NodeFactory(102);
+  const node3 = NodeFactory(186);
+  node1.left = node2;
+  node2.left = node3;
+  console.log(`Is the new BST balanced? ${isTreeBalanced(node1)}`);
+  const newBalancedBST = rebalance(node1);
+  prettyPrint(newBalancedBST);
+  console.log(`Is the new new BST balanced? ${isTreeBalanced(newBalancedBST)}`);
+  console.log(levelOrder(newBalancedBST, processNode));
+  console.log(inOrder(newBalancedBST, processNode));
+  console.log(postOrder(newBalancedBST, processNode));
+};
 
-insertNode(10, root); // correctly inserts 10 as a new node to the right of 9,
-// left of 6,345, 67 and 23
+runTests();
+// Previous tests
+// const myArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+// const myEasyArray = [2, 3, 12, 15, 28, 36, 39];
+// const start = 0;
+// const end = myArray.length - 1; // 2
+// const sortedArray = mergeSort(myArray);
+// const uniqueArray = removeDuplicates(sortedArray);
+// root = buildTree(uniqueArray, start, end);
+// const rootEasyExample = buildTree(myEasyArray, start, myEasyArray.length - 1);
 
-// prettyPrint(root);
+// // console.log(root);
 
-deleteNode(10, root); // Correctly deletes the previously added 10
+// insertNode(10, root); // correctly inserts 10 as a new node to the right of 9,
+// // left of 6,345, 67 and 23
 
-// prettyPrint(root);
+// // prettyPrint(root);
 
-prettyPrint(rootEasyExample);
+// deleteNode(10, root); // Correctly deletes the previously added 10
 
-// console.log(findNode(4, root)); // Returns the correct node with 1 and 7 as it's children
+// // prettyPrint(root);
 
-// console.log(levelOrder(root, processNode)); // Returns the level order traversed BST
+// prettyPrint(rootEasyExample);
 
-// console.log(inOrder(rootEasyExample, processNode)); returns expected output [2,3,12,15,28,36,39]
+// // console.log(findNode(4, root)); // Returns the correct node with 1 and 7 as it's children
 
-// console.log(preOrder(rootEasyExample, processNode)); returns expected output [13,3,5,12,36,28,39]
+// // console.log(levelOrder(root, processNode)); // Returns the level order traversed BST
 
-// console.log(postOrder(rootEasyExample, processNode)); returns expected output [2,12,3,28,39,15]
+// // console.log(inOrder(rootEasyExample, processNode)); returns expected output [2,3,12,15,28,36,39]
 
-// console.log(findHeight(rootEasyExample)); // Returns expected output 2
+// // console.log(preOrder(rootEasyExample, processNode)); returns expected output [13,3,5,12,36,28,39]
 
-// console.log(findHeight(rootEasyExample.left)); //  Returns expected output 1
+// // console.log(postOrder(rootEasyExample, processNode)); returns expected output [2,12,3,28,39,15]
 
-// console.log(findDepth(2, rootEasyExample)); // Returns output 2
+// // console.log(findHeight(rootEasyExample)); // Returns expected output 2
 
-console.log(isTreeBalanced(rootEasyExample)); // Expected output true
+// // console.log(findHeight(rootEasyExample.left)); //  Returns expected output 1
+
+// // console.log(findDepth(2, rootEasyExample)); // Returns output 2
+
+// console.log(isTreeBalanced(rootEasyExample)); // Expected output true
