@@ -338,8 +338,9 @@ const runTests = () => {
   prettyPrint(myBST);
   console.log(`Is BST balanced? ${isTreeBalanced(myBST)}`);
   console.log(levelOrder(myBST, processNode));
-  console.log(inOrder(myBST, processNode));
+  console.log(preOrder(myBST, processNode));
   console.log(postOrder(myBST, processNode));
+  console.log(inOrder(myBST, processNode));
   const node1 = NodeFactory(145);
   const node2 = NodeFactory(102);
   const node3 = NodeFactory(186);
@@ -350,8 +351,9 @@ const runTests = () => {
   prettyPrint(newBalancedBST);
   console.log(`Is the new new BST balanced? ${isTreeBalanced(newBalancedBST)}`);
   console.log(levelOrder(newBalancedBST, processNode));
-  console.log(inOrder(newBalancedBST, processNode));
+  console.log(preOrder(newBalancedBST, processNode));
   console.log(postOrder(newBalancedBST, processNode));
+  console.log(inOrder(newBalancedBST, processNode));
 };
 
 runTests();
@@ -382,16 +384,16 @@ runTests();
 
 // // console.log(levelOrder(root, processNode)); // Returns the level order traversed BST
 
-// // console.log(inOrder(rootEasyExample, processNode)); returns expected output [2,3,12,15,28,36,39]
+// console.log(inOrder(rootEasyExample, processNode)); returns expected output [2,3,12,15,28,36,39]
 
-// // console.log(preOrder(rootEasyExample, processNode)); returns expected output [13,3,5,12,36,28,39]
+// console.log(preOrder(rootEasyExample, processNode)); returns expected output [13,3,5,12,36,28,39]
 
-// // console.log(postOrder(rootEasyExample, processNode)); returns expected output [2,12,3,28,39,15]
+// console.log(postOrder(rootEasyExample, processNode)); returns expected output [2,12,3,28,39,15]
 
-// // console.log(findHeight(rootEasyExample)); // Returns expected output 2
+// console.log(findHeight(rootEasyExample)); // Returns expected output 2
 
-// // console.log(findHeight(rootEasyExample.left)); //  Returns expected output 1
+// console.log(findHeight(rootEasyExample.left)); //  Returns expected output 1
 
-// // console.log(findDepth(2, rootEasyExample)); // Returns output 2
+// console.log(findDepth(2, rootEasyExample)); // Returns output 2
 
 // console.log(isTreeBalanced(rootEasyExample)); // Expected output true
