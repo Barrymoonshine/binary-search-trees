@@ -2,9 +2,9 @@
 
 ## Summary
 
-This project builds a Binary Search Tree (BST) in the console using a randomly generated array. The array is sorted, any duplicates are removed and used to build a BST.
+This project builds a Binary Search Tree (BST) in the console using a randomly generated array which has been sorted and any duplicates removed.
 
-Further tests are completed on the BST to test if it's balanced and log the tree in the console in the following traversal orders:
+The BST is tested to see if it's balanced and logged in the console in the following traversal orders:
 
 - Level order
 - Pre order
@@ -13,7 +13,7 @@ Further tests are completed on the BST to test if it's balanced and log the tree
 
 Finally the above process is also completed on what is initially an unbalanced tree.
 
-Note: no front end has been created as part of this project, see index.js in the source folder for solutions to this problem.
+Note: no front end has been created for this project, see index.js in the source folder for solutions to this problem.
 
 This project was completed as part of the [The Odin Project](https://www.theodinproject.com/) full stack javascript curriculum.
 
